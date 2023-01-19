@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/react/umd/react.development.js"></script>
+    <script src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/swiper/dist/js/swiper.js"></script>
+    <link rel="stylesheet" href="./node_modules/swiper/dist/css/swiper.css">
+</head>
+<style>
+   
+    .page-header {
+        display: none
+    }
+
+    #MainContent .container {
+        padding: 0
+    }
+
+    .wall-detail-warp {
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-top: 20px;
+        font-family: "Microsoft YaHei UI", Arial, "Times New Roman"
+
+    }
+
+    .wall-detail-warp h2 {
+        font-family: "Microsoft YaHei UI", Arial, "Times New Roman" !important
+    }
+
+    .wall-detail-warp section {
+        display: inline-block;
+    }
+
+    .wall-layout {
+        max-width: 1200px;
+        vertical-align: top;
+        width: calc(100vw - 3rem);
+        display: flex;
+    }
+    .wall-layout p{
+        margin: 0 !important;
+    }
+    .w-l-warp {
+        width: 50%;
+        max-width: calc(500px - 1.5rem);
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+        vertical-align: top;
+    }
+
+    .w-r-warp {
+        width: 100%;
+        max-width: calc(700px - 1.5rem);
+        padding-left: 1.5rem;
+        margin-left: 0.5rem;
+        margin-right: 0.55rem;
+        position: relative;
+        vertical-align: top;
+    }
+
+    .fr-ec-image {
+        position: relative;
+        overflow: hidden;
+        background-size: cover;
+        background-position: 50%;
+        padding-top: 133.33%;
+    }
+
+    .fr-ec-image__img {
+        position: absolute;
+        width: 100%;
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        border: none;
+    }
+
+    .wall-layout .slick-arrow {
+        -webkit-appearance: none;
+        padding: 0.25rem;
+        background-color: #fff;
+        margin: 0;
+        pointer-events: auto;
+        border: none;
+        outline: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9;
+        opacity: .9;
+    }
+
+    .wall-layout .slick-arrow:hover {
+        background-color: #6a6a6a;
+    }
+
+    .slick-next {
+        right: 0;
+    }
+
+    .swiper-button-disabled {
+        opacity: 0 !important;
+    }
+
+    .fr-ec-gutter-container {
+        margin-bottom: 5.5rem;
+    }
+
+    .fr-ec-gutter-container h2 {
+        margin: 0;
+    }
+
+    .fr-ec-gutter-container a {
+        text-decoration: none;
+    }
+
+    .fr-ec-gutter-container h4 {
+        margin-bottom: 1.4rem;
+        font-size: calc(1.1875rem + 1px);
+        line-height: 1.4;
+        font-weight: 700;
+    }
+
+    .fr-ec-tab-group__content {}
+
+    .fr-ec-collection-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
+    }
+
+    .fr-ec-collection-list__item {
+        margin: 0;
+        border: none;
+        padding: 1rem 0;
+    }
+
+    .fr-ec-collection-list__item:not(:only-child) {
+        border-bottom: 1px solid #dadada;
+    }
+
+    .fr-ec-title {
+        width: 100%;
+        height: auto;
+        display: block;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .fr-ec-media-object {
+        display: flex;
+    }
+
+    .fr-ec-media-object__media {
+        height: auto;
+        width: 6.25rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    .fr-ec-image-enhancements {
+        position: relative;
+        margin-bottom: 0.75rem;
+    }
+
+    .fr-ec-image1 {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        background-size: cover;
+        background-position: 50%;
+        padding-top: 100%;
+
+    }
+
+    .fr-ec-image__img1 {
+        opacity: 1;
+        position: absolute;
+        width: 100%;
+        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+
+    .fr-ec-media-object__content {
+        display: inline-block;
+        vertical-align: top;
+        flex: 1;
+    }
+
+    .r-ec-tile--default {
+        width: 100%;
+        height: auto;
+        display: block;
+        position: relative;
+    }
+
+    .fr-ec-actionable-content {
+        display: flex;
+        margin: -1rem 0 0 -1.5rem;
+    }
+
+    .fr-ec-actionable-content__content--default {
+        width: 52.35%;
+        margin-top: 1rem;
+        margin-left: 1.5rem;
+        flex-grow: 999;
+    }
+
+    .fr-ec-flag-text {
+        font-size: .8125rem;
+        line-height: 1.5;
+        font-weight: 300;
+    }
+
+    .fr-ec-title {
+        line-height: 1.5;
+        font-size: .9375rem;
+        font-weight: 300;
+        margin-bottom: 0.75rem !important;
+
+    }
+
+    .fr-ec-flag-text {
+        font-size: .8125rem;
+        line-height: 1.5;
+        font-weight: 300;
+    }
+
+    .fr-ec-price {
+        display: inline-block;
+        position: relative;
+    }
+
+    .fr-ec-content-alignment {
+        margin: 0.25rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: baseline;
+    }
+
+    .fr-ec-price-text {
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #e00;
+        letter-spacing: .025rem;
+    }
+
+    .fr-ec-link-text {
+        display: inline-block;
+        margin: 0;
+        outline: 0;
+        text-align: left;
+        cursor: pointer;
+        color: #000;
+        position: relative;
+        text-decoration: underline !important;
+    }
+
+    .fr-ec-body {
+        line-height: 1.5;
+        font-size: .9375rem;
+        font-weight: 300;
+    }
+
+    .fr-ec-actionable-content__actions--default {
+        width: 10.5rem;
+        margin-top: 1rem;
+        margin-left: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .fr-link-to {
+        display: block;
+    }
+
+    .fr-ec-button {
+        font-size: 1rem;
+        line-height: 1.2;
+        font-weight: 700;
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        padding: 0 1rem;
+        height: 3.25rem;
+        width: calc(50% - 0.75rem);
+        max-width: none;
+        margin: 0;
+        border: none;
+        word-wrap: break-word;
+        outline: 0;
+        overflow: visible;
+        transition-property: background-color, color;
+        transition-duration: .18s;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+        border: 1px solid #1b1b1b;
+        margin: 1.5rem 0 5.5rem 0;
+    }
+    .fr-ec-flag-style{
+    margin-bottom: 0.25rem;
+    text-align: left;
+    line-height: 1.3;
+    font-weight: 400;
+    font-size: .875rem;
+    }
+    @media (max-width:728px) {
+
+        .wall-detail-warp {
+            margin-top: 0;
+        }
+
+        .wall-layout {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .w-l-warp {
+            width: 100%;
+            margin: 0 0;
+        }
+
+        .w-r-warp {
+            padding-left: 0;
+            margin-left: 0;
+            margin-left: 0
+        }
+
+        .fr-ec-actionable-content__content--default {
+            width: 90%;
+        }
+
+        .fr-ec-actionable-content {
+            flex-direction: column;
+        }
+
+        .fr-ec-media-object__content {
+            flex: auto;
+        }
+
+        .fr-ec-button {
+            width: 96%;
+
+            margin: 0 auto;
+            margin-top: 1.5rem;
+        }
+
+        .fr-ec-content-alignment {
+
+            margin-left: 0.5rem;
+            margin-right: 0.5rem
+        }
+
+        .fr-ec-button-box {
+            padding: 0 1.2rem;
+            display: flex;
+        }
+
+        .fr-ec-gutter-container h4 {
+            padding-left: 0.5rem
+        }
+
+    }
+                .wall-user-info-warp{
+                    margin-left: 0.5rem;
+margin-right: 0.5rem;
+                }   
+                    .wall-user-info-box{
+                        display: flex;
+                        margin-top: 1rem;
+
+                    }
+                    .wall-user{
+                        width: auto;
+                    }
+                    .wall-user-image{
+                    min-height: 3.5rem;
+                    min-width: 3.5rem;
+                    height: 3.5rem;
+                    width: 3.5rem;
+                    margin-right: 0.75rem;
+                    }
+                    .wall-user-image-box{
+                    display: block;
+                    position: relative;
+                    overflow: hidden;
+                    background-size: cover;
+                    background-position: 50%;
+                    padding-top: 100%;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    }
+                    .wall-user-img{
+                    opacity: 1;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    margin: 0;
+                    }
+                    .wall-user-info{
+                        width: calc(100% - 4.25rem);
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                    }
+                    .user-info-box{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+          
+                    width: 100%;
+                   
+                    align-items: center;
+                    }
+                    .info-name{
+                        text-overflow: ellipsis;
+overflow: hidden;
+                    }
+                    .info-name-style{
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    min-width: 45%;
+                    margin-right: 0.25rem;
+                    display: block;
+                    font-size: .8125rem;
+                    font-weight: 300;
+                    }
+                    .info-fr-ec-icon{
+                    margin-right: 0.5rem;
+                    fill: #e6a075;
+                    width: 0.75rem;
+                    height: 0.75rem;
+                    display: flex;
+                    flex-shrink: 0;
+                    color: #767676;
+                    }
+                    .info-size-style{
+                    font-weight: 300;
+                    text-align: left;
+                    font-size: 0.8125rem;
+                    color: #ababab;
+                    }
+                    .user-info-address{
+                        width: auto;
+                    }
+                    .info-address-style{
+                    font-weight: 300;
+                    font-size: .8125rem;
+                    }
+                    .user-info-des{
+                    font-weight: 300;
+                    font-size: .8125rem;
+                    line-height: 1.5;
+                    color: #000;
+                    text-align: left;
+                    margin-top: 1rem;
+                    
+                    }
+                    .fr-ec-caption{
+                    margin-top: 1rem;
+                    color: #6a6a6a;
+                    font-weight: 400;
+                    font-size: .8125rem;
+                    line-height: 1.3;
+                    text-align: left;
+                    margin-top: 1rem;
+                    }
+</style>
+<body>
+    <div id="root">
+    </div>
+    <script type="text/babel">
+        const init_list = {
+            lady:{
+                swiper_list:[
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/janzengabriel_...jpg?v=1673839177'
+                    },
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/janzengabriel_...jpg?v=1673839177'
+                    },
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/janzengabriel_...jpg?v=1673839177'
+                    },
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/janzengabriel_...jpg?v=1673839177'
+                    },
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/janzengabriel_...jpg?v=1673839177'
+                    }
+                ],
+                prd_info:[
+                    {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    },
+                    {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    },
+                    {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    },   {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    },
+                    {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    }
+                ],
+                user_info:{
+                    name:'janzengabriel',
+                    size:'72.1 inch / 183 cm',
+                    address:'Philippines',
+                    img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/image_6_160x160.png?v=1673840646',
+                    des:'SuperMade jackets are fully windproof. The tightly woven surface keeps air molecules out, preventing heat from escaping the jacket.',
+                    update:'27/10/2022'
+                }
+            },
+            li:{
+                swiper_list:[
+                    {
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/image_7_160x160.png?v=1673935049'
+                    }
+                ],
+                prd_info:[
+                    {
+                        name:'The Supermade Retro Style Quilted Racing Jacket -1297',
+                        price:'$100',
+                        org_price:'$200',
+                        color:'Red',
+                        size:'XL',
+                        img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/products/3dc651b69f054dc0bfac3c55a09c4853_180x.jpg?v=1670582227',
+                        link_url:'https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1'
+                    }
+                ],
+                user_info:{
+                    name:'janzengabriel',
+                    size:'72.1 inch / 183 cm',
+                    address:'Philippines',
+                    img_path:'https://cdn.shopify.com/s/files/1/0610/7208/1122/files/image_6_160x160.png?v=1673840646',
+                    des:'SuperMade jackets are fully windproof. The tightly woven surface keeps air molecules out, preventing heat from escaping the jacket.',
+                    update:'27/10/2022'
+                }
+            }
+        }
+        const App = (props)=>{
+            React.useEffect(()=>{
+                const mySwiper = new Swiper('.wall-box', {
+                direction: 'horizontal',
+                speed: 500,
+                loop: false,
+                observer: true,
+                nextButton: '.slick-next',
+                prevButton: '.slick-prev',
+                allowTouchMove: true,
+                spaceBetween: 10,
+
+            });
+            },[])
+            const {data} = props
+            return(
+            <div className="wall-detail-warp">
+                   <div className="wall-layout">
+                    <div className="w-l-warp">
+                     <div className="wall-box swiper-container">
+                       <div className="swiper-wrapper" style={{paddingLeft: "0"}}>
+                        {
+                            data.swiper_list.map((item,index)=>{
+                                return(
+                                    <div className="swiper-slide" key = {index}>
+                                       <div className="fr-ec-image">
+                                         <img className="lazyload fr-ec-image__img"
+                                           src={item.img_path}/>
+                                       </div>
+                           </div>
+                                )
+                            })
+                        }
+           
+                    </div>
+                    <button className="slick-prev slick-arrow" arialabel="Previous" type="button" 
+                        style={{top: "317.312px"}}> <svg width="24" height="24"  focusable="false"
+                            className="fr-ec-icon fr-ec-icon--default" role="presentation">
+                            <g fillRule="evenodd">
+                                <polygon
+                                    transform="translate(12.000500, 12.500000) scale(-1, 1) rotate(-90.000000) translate(-12.000500, -12.500000)"
+                                    points="17.664 9 12 13.541 6.336 9 5 10.387 12 16 19.001 10.387">
+                                </polygon>
+                            </g>
+                        </svg> </button> <button className="slick-next slick-arrow" style={{top: "317.312px"}}
+                         type="button" > <svg width="24" height="24"
+                            focusable="false" className="fr-ec-icon fr-ec-icon--default"
+                            role="presentation">
+                            <g fillRule="evenodd">
+                                <polygon
+                                    transform="translate(12.000500, 12.500000) rotate(-90.000000) translate(-12.000500, -12.500000)"
+                                    points="17.664 9 12 13.541 6.336 9 5 10.387 12 16 19.001 10.387">
+                                </polygon>
+                            </g>
+                        </svg> </button>
+                </div>
+                <div className = "wall-user-info-warp">
+                    <div className="wall-user-info-box">
+                        <div className="wall-user">
+                            <div className="wall-user-image">
+                                    <div className="wall-user-image-box">
+                                        <img className="wall-user-img "
+                                            src={data.user_info.img_path}
+                                            alt=""/>
+                                    </div>
+                            </div>
+                        </div>
+                        <div className="wall-user-info">
+                            <div className="user-info-box">
+                                <div className="info-name"><span className="info-name-style">{data.user_info.name}</span></div>
+                                <svg width="50" height="50" viewBox="0 0 50 50" focusable="false" className="info-fr-ec-icon" role="presentation"><path fillRule="evenodd" clipRule="evenodd" d="M16.2878 49.1506L24.9544 44.3439L33.621 49.1506L37.1703 39.8977L46.8989 38.0091L43.6702 28.6395L49.9088 20.9392L41.4128 15.8371L41.2422 5.92829L31.4543 7.48096L24.9544 0L18.4545 7.48096L8.66657 5.92829L8.496 15.8371L0 20.9392L6.2386 28.6395L3.00987 38.0091L12.7385 39.8977L16.2878 49.1506ZM35.2369 20.4818L31.6587 16.8929L21.5386 26.9787L15.8623 21.3163L12.2847 24.9058L21.5382 34.1399L35.2369 20.4818Z"></path></svg>
+                                <div className="info-size">
+                                    <span className="info-size-style">{data.user_info.size}</span>
+                                </div>
+                            </div>
+                            <div className="user-info-address">
+                                <span className="info-address-style">{data.user_info.address}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="user-info-des">
+                   {data.user_info.des}
+                    </div>
+                    <div className="fr-ec-caption">
+                        <font style={{verticalAlign: "inherit"}}>
+                            <font style={{verticalAlign: "inherit"}}>update {data.user_info.update}</font>
+                        </font>
+                    </div>
+                </div>
+                </div>
+                   <div className="w-r-warp">
+                        <div className="fr-ec-gutter-container">
+                    <h4>Wearing Items</h4>
+                    <div>
+                        <div className="fr-ec-tab-group__content">
+                            <div className="fr-ec-content-alignment">
+                                <ul className="fr-ec-collection-list">
+                                   {
+                                    data.prd_info.map((item,index)=>{
+                                        return(
+                                            <li key={index}  className="fr-ec-collection-list__item"><a className="fr-link-to"
+                                            href="https://www.thesupermade.com/products/retro-style-quilted-racing-jacket-1">
+                                            <div className="fr-ec-media-object">
+                                                <div className="fr-ec-media-object__media">
+                                                    <div className="fr-ec-image-enhancements">
+                                                        <div className="fr-ec-image1"><img
+                                                                className="fr-ec-image__img1 lazyload"
+                                                                src={item.img_path}
+                                                                alt=""/></div>
+                                                    </div>
+                                                </div>
+                                                <div className="fr-ec-media-object__content">
+                                                    <div className="fr-ec-actionable-content">
+                                                        <div
+                                                            className="fr-ec-actionable-content__content--default">
+                                                            <div className="fr-ec-flag-text"
+                                                                style={{display: "none"}}>Unisex</div>
+                                                            <h2 className="fr-ec-title">{item.name}</h2>
+                                                            <p className="fr-ec-flag-style">
+                                                                <font style={{verticalAlign: "inherit"}}>
+                                                                    <font>Color: {item.color}</font>
+                                                                </font>
+                                                            </p>
+                                                            <p className="fr-ec-flag-style">
+                                                                <font style={{verticalAlign: "inherit"}}>
+                                                                    <font>Size: {item.size}</font>
+                                                                </font>
+                                                            </p>
+                                                            <div className="fr-ec-price">
+                                                                <div className="fr-ec-content-alignment">
+                                                                    <strong className="fr-ec-price-text">{item.price}</strong>
+                                                                    <i style={{textDecorationLine: "line-through",paddingleft: "0.4rem",color: "rgb(102, 102,102)",fontStyle: "normal"}}>{item.org_price}</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            className="fr-ec-actionable-content__actions--default">
+                                                            <div className="fr-ec-link-text"><span
+                                                                    className="fr-ec-body ">More
+                                                                    Details</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                        )
+                                    })
+                                   }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="fr-ec-button-box"><a
+                            href="https://www.thesupermade.com/pages/on-the-grid"
+                            className="fr-ec-button">Back</a></div>
+                </div>
+                   </div></div>
+            </div>
+            )
+        }
+        const get_current_product_info = (url,init_list)=>{
+        const params = url.split("?")[1];
+         let data_list = {};
+         Object.keys(init_list).filter(item=>{
+               if(item === params){
+                data_list = init_list[item]
+               }
+            })
+        return data_list
+        }
+        
+        ReactDOM.createRoot(document.getElementById("root")).render(<App data={get_current_product_info(location.href,init_list)}/>)
+    </script>
+</body>
+</html>
